@@ -1,0 +1,86 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi",
+        "Hey",
+        "How are you",
+        "Is anyone there?",
+        "Hello",
+        "Good day",
+        "What's up?"
+      ],
+      "responses": [
+        "Hello",
+        "Hello, thanks for visiting",
+        "Hi there, what can I do for you?",
+        "Hi there, how can I help?"
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": ["Bye", "See you later", "Goodbye"],
+      "responses": [
+        "See you later, thanks for visiting",
+        "Have a nice day",
+        "Bye! Come back again soon."
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": ["Thanks", "Thank you", "That's helpful", "Thank's a lot!"],
+      "responses": ["Happy to help!", "Any time!", "My pleasure"]
+    },
+    {
+      "tag": "sad",
+      "patterns": [
+        "sad",
+        "I feel sad",
+        "I feel bad"
+      ],
+      "responses": [
+        "Dwell on the beauty of life. Watch the stars, and see yourself running with them.",
+        "The happiness of your life depends upon the quality of your thoughts.",
+        "When you arise in the morning think of what a privilege it is to be alive, to think, to enjoy, to love ..."
+      ]
+    },
+    {
+      "tag": "angry",
+      "patterns": [
+        "I'm mad",
+        "I am angry",
+        "I hate this person"
+      ],
+      "responses": [
+        "The best revenge is to be unlike him who performed the injury.",
+        "The soul becomes dyed with the colour of its thoughts.",
+        "Whenever you are about to find fault with someone, ask yourself the following question: What fault of mine most nearly resembles the one I am about to criticize?"
+      ]
+    },
+    {
+      "tag": "worry",
+      "patterns": [
+        "I'm worried",
+        "I am anxious",
+        "concern"
+      ],
+      "responses": [
+        "If you are distressed by anything external, the pain is not due to the thing itself, but to your estimate of it; and this you have the power to revoke at any moment.",
+        "Never let the future disturb you. You will meet it, if you have to, with the same weapons of reason which today arm you against the present."
+      ]
+    },
+    {
+      "tag": "funny",
+      "patterns": [
+        "Tell me a joke!",
+        "Tell me something funny!",
+        "Do you know a joke?"
+      ],
+      "responses": [
+        "Why did the hipster burn his mouth? He drank the coffee before it was cool.",
+        "What did the buffalo say when his son left for college? Bison."
+      ]
+    }
+  ]
+}
