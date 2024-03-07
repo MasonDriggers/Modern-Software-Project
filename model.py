@@ -1,6 +1,9 @@
-import torch
 import torch.nn as nn
 
+from transformers import BartTokenizer, BartForConditionalGeneration
+
+tokenizer = BartTokenizer.from_pretrained('facebook/bart-base')
+model = BartForConditionalGeneration.from_pretrained('facebook/bart-large')
 
 class NeuralNet(nn.Module):
     def __init__(self, input_size, hidden_size, num_classes):
