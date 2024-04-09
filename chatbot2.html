@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #chat-container {
+            width: 300px;
+            margin: 50px auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        #messages {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        .message {
+            margin-bottom: 10px;
+        }
+        .user-message {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <ul id="messages"></ul>
+        <input type="text" id="user-input" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        function sendMessage() {
+            var userInput = document.getElementById("user-input").value;
+            var messages = document.getElementById("messages");
+
+            // Display user message
+            var userMessage = document.createElement("li");
+            userMessage.textContent = "You: " + userInput;
+            userMessage.className = "message user-message";
+            messages.appendChild(userMessage);
+
+            // Reply from the bot (in this example, a simple echo)
+            var botMessage = document.createElement("li");
+            botMessage.textContent = "Bot: " + userInput; // Simple echo
+            botMessage.className = "message";
+            messages.appendChild(botMessage);
+
+            // Clear user input
+            document.getElementById("user-input").value = "";
+        }
+    </script>
+</body>
+</html>
