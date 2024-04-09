@@ -29,15 +29,18 @@
         }
         .image-container a {
             flex: 0 0 23%;
+            text-decoration: none; /* remove default underline from links */
         }
         .image-container img {
-            width: 100%;
+            width: 100%; /* make all images fill the container */
+            height: auto; /* maintain aspect ratio */
             border-radius: 8px;
             margin-bottom: 10px;
         }
         .image-title {
             font-size: 20px;
             margin-bottom: 10px;
+            display: block; /* ensure titles appear below images */
         }
     </style>
 </head>
@@ -47,20 +50,20 @@
         <p>"Pick Your Poet" lets you select your favorite poet as your conversational companion through Eliza, offering engaging conversations and insightful perspectives on life, love, and more.</p>
         <div class="image-container">
             <a href="chatbot1.html">
-                <img src="image1.jpg" alt="Socrates">
+                <img src="socrates.jpg" alt="Socrates">
                 <div class="image-title">Socrates</div>
             </a>
             <a href="chatbot2.html">
-                <img src="image2.jpg" alt="William Shakespeare">
+                <img src="shakespeare.jpg" alt="William Shakespeare">
                 <div class="image-title">William Shakespeare</div>
             </a>
             <a href="chatbot3.html">
-                <img src="image3.jpg" alt="Maya Angelou">
+                <img src="angelou.jpg" alt="Maya Angelou">
                 <div class="image-title">Maya Angelou</div>
             </a>
             <a href="chatbot4.html">
-                <img src="image4.jpg" alt="Marcus Auralias">
-                <div class="image-title">Marcus Auralias</div>
+                <img src="aurelius.jpg" alt="Marcus Auralias">
+                <div class="image-title">Marcus Aurelius</div>
             </a>
         </div>
     </div>

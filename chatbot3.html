@@ -3,57 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot</title>
+    <title>Chatbot Page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
         }
-        #chat-container {
-            width: 300px;
-            margin: 50px auto;
+        .container {
+            width: 800px;
+            display: flex;
             border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .panel {
+            flex: 1;
             padding: 20px;
-            border-radius: 5px;
+            background-color: #fff;
         }
-        #messages {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
+        .chatbot {
+            border-left: 1px solid #ccc;
+            padding-left: 20px;
         }
-        .message {
+        .author-info {
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 24px;
             margin-bottom: 10px;
         }
-        .user-message {
-            text-align: right;
+        p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            resize: none;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div id="chat-container">
-        <ul id="messages"></ul>
-        <input type="text" id="user-input" placeholder="Type your message...">
-        <button onclick="sendMessage()">Send</button>
+    <div class="container">
+        <div class="panel">
+            <div class="author-info">
+                <h2>Your therapist is in: 
+                    Maya Angelou</h2>
+                <p>Maya Angelou (1928-2014) was an American poet, memoirist, and civil rights activist. 
+                    Born Marguerite Annie Johnson in St. Louis, Missouri, she faced racial discrimination and trauma during her early years, experiences that would shape much of her later work. 
+                    Angelou's literary career flourished with her acclaimed autobiography "I Know Why the Caged Bird Sings," which detailed her childhood struggles. 
+                    She went on to write numerous volumes of poetry, essays, and autobiographies, earning widespread acclaim and accolades, including the Presidential Medal of Freedom. 
+                    Angelou's writing celebrated resilience, hope, and the power of the human spirit, making her a beloved and influential figure in American literature.</p>
+                <button onclick="sendMessage()">Send a Message</button>
+                <textarea id="user-message" placeholder="Type your message..."></textarea>
+            </div>
+        </div>
+        <div class="panel chatbot">
+            <!-- Chatbot interface goes here -->
+            <div id="chat">
+                <div id="messages"></div>
+            </div>
+        </div>
     </div>
 
     <script>
+        // Define initial message from chatbot
+        var initialMessage = "How can I help?";
+
+        // Display initial message from chatbot
+        var messages = document.getElementById("messages");
+        var initialMessageDiv = document.createElement("div");
+        initialMessageDiv.textContent = "Maya Angelou: " + initialMessage;
+        messages.appendChild(initialMessageDiv);
+
+        // Function to send message
         function sendMessage() {
-            var userInput = document.getElementById("user-input").value;
+            var userMessage = document.getElementById("user-message").value;
             var messages = document.getElementById("messages");
 
             // Display user message
-            var userMessage = document.createElement("li");
-            userMessage.textContent = "You: " + userInput;
-            userMessage.className = "message user-message";
-            messages.appendChild(userMessage);
+            var userMessageDiv = document.createElement("div");
+            userMessageDiv.textContent = "You: " + userMessage;
+            messages.appendChild(userMessageDiv);
 
-            // Reply from the bot (in this example, a simple echo)
-            var botMessage = document.createElement("li");
-            botMessage.textContent = "Bot: " + userInput; // Simple echo
-            botMessage.className = "message";
-            messages.appendChild(botMessage);
+            // Clear input
+            document.getElementById("user-message").value = "";
 
-            // Clear user input
-            document.getElementById("user-input").value = "";
+            // Simulate reply from chatbot
+            setTimeout(function() {
+                var replyMessageDiv = document.createElement("div");
+                replyMessageDiv.textContent = "Maya Angelou: Thank you for your message! I'll get back to you soon.";
+                messages.appendChild(replyMessageDiv);
+            }, 1000); // Simulating delay for response
         }
     </script>
 </body>
