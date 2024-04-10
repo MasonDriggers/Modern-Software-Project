@@ -8,29 +8,28 @@ body, html {
 body {
     background: linear-gradient(to right, #e18a26c2, #cd6633e3);
     font-family: Monaco, monospace;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .container {
     max-width: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    padding: 20px; /* Add padding for spacing */
+    padding: 20px; 
 }
 
 h1, p {
-    flex: 0 0 48%; /* Adjust width to make room for both */
-    margin: 0; /* Remove default margins */
-    
-    
+    width: 100%; /* Take full width */
+    text-align: center; /* Center-align */
 }
 
 .image-container {
     display: flex;
     justify-content: space-around;
+    align-items: center;
+    width: 100%; /* Take full width */
     flex-wrap: wrap;
 }
 
@@ -40,13 +39,21 @@ h1, p {
 }
 
 .image-container img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
+    width: 300px;
+    height: 300px;
     margin-bottom: 10px;
+    border: 3px solid black;
 }
 
-p{
-    font-size: 10px
+a {
+    color: black;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+h1 {
+    font-size: 18;
+    text-align: left;
+}
+p {
     text-align: left;
 }
