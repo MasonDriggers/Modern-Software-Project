@@ -14,22 +14,48 @@ body {
 .container {
     max-width: 100%;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column; /* Stack elements vertically */
     justify-content: center;
     align-items: center;
     padding: 20px; 
 }
 
-h1 {
-    width: 100%; 
-    text-align: center; 
+.black-bar {
+    background-color: black;
+    height: 40px; /* Increased height for better visibility */
+    width: 100%;
+    display: flex;
+    align-items: center; /* Center-align text vertically */
+    justify-content: center; /* Center-align text horizontally */
+}
+
+.bar-link {
+    color: rgb(237, 121, 63); 
+    text-decoration: none;
+    font-size: 14pt;
+    font-weight: normal;
+    margin: 0 20px; 
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;}
+
+.text-container {
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    width: 100%;
+    max-width: 75%; /* Set maximum width for text container */
+    margin-bottom: 20px; /* Add margin bottom for spacing */
+}
+
+h1, p {
+    width: 100%; /* Take full width */
+    text-align: center; /* Center-align */
 }
 
 .image-container {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 100%; 
+    width: 100%; /* Take full width */
     flex-wrap: wrap;
 }
 
@@ -40,7 +66,7 @@ h1 {
 
 .image-container img {
     width: 300px;
-    height: 350px;
+    height: 300px;
     margin-bottom: 10px;
     border: 3px solid black;
 }
@@ -48,15 +74,15 @@ h1 {
 a {
     color: black;
     font-weight: bold;
-    font-size: 16pt;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
 h1 {
-    font-size: 18;
+    font-size: 48px; /* Added 'px' unit */
     text-align: left;
 }
+
 p {
-    width: 75%; 
     text-align: left;
-    font-weight: bold;
+    font-size: 20pt;
 }
