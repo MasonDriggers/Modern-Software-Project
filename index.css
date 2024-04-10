@@ -37,14 +37,20 @@ body {
     margin: 0 20px; 
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;}
 
-.text-container {
-    display: flex;
-    flex-direction:row;
-    align-items: center;
-    width: 100%;
-    max-width: 75%; /* Set maximum width for text container */
-    margin-bottom: 20px; /* Add margin bottom for spacing */
-}
+    .text-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        max-width: 75%; /* Set maximum width for text container */
+        margin-bottom: 20px; /* Add margin bottom for spacing */
+    }
+    
+    .paragraph-box {
+        border: 2px solid black; /* Add border around the paragraph */
+        padding: 20px; /* Add padding inside the border */
+    }
+    
 
 h1, p {
     width: 100%; /* Take full width */
