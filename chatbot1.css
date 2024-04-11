@@ -38,18 +38,29 @@ body {
     padding: 20px; 
 }
 
+.content-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.paragraph {
+    flex: 1; /* Take remaining space */
+    padding-right: 20px; /* Add right padding for spacing */
+}
+
 .panel {
-    width: 100%;
-    max-width: 75%;
-    margin-bottom: 20px;
+    flex: 1; /* Take remaining space */
 }
 
 .chatbox {
-    border: 2px solid black; /* Add border around the chatbox */
+    border: 3px solid rgb(0, 0, 0); /* Add border around the chatbox */
+    background: linear-gradient(to top, #000000, #5a5252);
     padding: 20px; /* Add padding inside the border */
     max-width: 100%; /* Set maximum width for the chatbox */
     overflow-y: auto; /* Add scroll bar when content exceeds box height */
     height: 300px; /* Set fixed height for the chatbox */
+    color: white; /* Set text color to white */
 }
 
 .input-area {
@@ -58,11 +69,37 @@ body {
     justify-content: space-between;
 }
 
-#user-message {
-    flex: 1;
-    margin-right: 10px;
+.icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Make the image circular */
+    margin-right: 5px; /* Add spacing between image and text */
 }
 
-button {
-    height: 100%; /* Ensure button height matches the textarea */
+.message-container {
+    margin-bottom: 10px; /* Add margin between messages */
+}
+
+.user-message {
+    background-color: #e18a26; /* Change background color for user messages */
+    color: white; /* Change text color for user messages */
+    border-radius: 10px; /* Add border radius for bubble effect */
+    padding: 10px; /* Add padding inside the bubble */
+    max-width: 70%; /* Limit the width of user messages */
+}
+
+.chatbot-message {
+    background-color: #2c3e50; /* Change background color for chatbot messages */
+    color: white; /* Change text color for chatbot messages */
+    border-radius: 10px; /* Add border radius for bubble effect */
+    padding: 10px; /* Add padding inside the bubble */
+    max-width: 70%; /* Limit the width of chatbot messages */
+}
+
+.right {
+    align-self: flex-end; /* Align messages to the right */
+}
+
+.left {
+    align-self: flex-start; /* Align messages to the left */
 }

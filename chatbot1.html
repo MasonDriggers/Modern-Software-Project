@@ -15,17 +15,15 @@
         <a href="chatbot4.html" class="bar-link">MARCUS AURELIUS</a>
     </div>
     <div class="container">
-        <div class="panel">
-            <div class="author-info">
-                <h2>YOUR THERAPIST IS IN: SOCRATES</h2>
-                <p>Socrates (469-399 BCE) was a Greek philosopher renowned for his contributions to ethics and Western philosophy. Born in Athens, little is known about his early life except through the writings of his students, particularly Plato. Socrates is best known for his method of questioning, known as the Socratic method, which aimed at eliciting truth by engaging in dialogue and challenging assumptions. He famously asserted that "the unexamined life is not worth living." Socrates' teachings often challenged societal norms, leading to his trial and execution for impiety and corrupting the youth of Athens. His legacy endures as a foundational figure in philosophical inquiry.</p>
-            </div>
+        <h2>YOUR THERAPIST IS IN: SOCRATES</h2>
+        <div class="paragraph">
+            <p>Socrates (469-399 BCE) was a Greek philosopher renowned for his contributions to ethics and Western philosophy. Born in Athens, little is known about his early life except through the writings of his students, particularly Plato. Socrates is best known for his method of questioning, known as the Socratic method, which aimed at eliciting truth by engaging in dialogue and challenging assumptions. He famously asserted that "the unexamined life is not worth living." Socrates' teachings often challenged societal norms, leading to his trial and execution for impiety and corrupting the youth of Athens. His legacy endures as a foundational figure in philosophical inquiry.</p>
         </div>
         <div class="panel chatbot">
             <div id="chat" class="chatbox">
                 <div id="messages"></div>
                 <div class="input-area">
-                    <textarea id="user-message" placeholder="Type your message..." onkeydown="handleKeyDown(event)"></textarea>
+                    <textarea id="user-message" placeholder="Type your message here..." onkeydown="handleKeyDown(event)"></textarea>
                     <button onclick="sendMessage()">Send a Message</button>
                 </div>
             </div>
@@ -49,7 +47,8 @@
 
             // Display user message
             var userMessageDiv = document.createElement("div");
-            userMessageDiv.textContent = "You: " + userMessage;
+            userMessageDiv.textContent = userMessage;
+            userMessageDiv.className = "message-container user-message right";
             messages.appendChild(userMessageDiv);
 
             // Clear input
@@ -61,7 +60,8 @@
             // Simulate reply from chatbot
             setTimeout(function() {
                 var replyMessageDiv = document.createElement("div");
-                replyMessageDiv.textContent = "Socrates: Thank you for your message! I'll get back to you soon.";
+                replyMessageDiv.innerHTML = '<img src="socrates.jpg" alt="Socrates Icon" class="icon"> Thank you for your message! I\'ll get back to you soon.';
+                replyMessageDiv.className = "message-container chatbot-message left";
                 messages.appendChild(replyMessageDiv);
 
                 // Scroll to the bottom of the chatbox after receiving the reply
