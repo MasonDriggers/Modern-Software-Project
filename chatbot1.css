@@ -1,5 +1,68 @@
+/* chatbot1.css */
+
 body, html {
     margin: 0;
     padding: 0;
 }
 
+body {
+    background: linear-gradient(to right, #e18a26c2, #cd6633e3);
+    font-family: Monaco, monospace;
+    font-size: 16px;
+}
+
+.black-bar {
+    background-color: black;
+    height: 40px; /* Increased height for better visibility */
+    width: 100%;
+    display: flex;
+    align-items: center; /* Center-align text vertically */
+    justify-content: center; /* Center-align text horizontally */
+}
+
+.bar-link {
+    color: rgb(237, 121, 63); 
+    text-decoration: none;
+    font-size: 14pt;
+    font-weight: normal;
+    margin: 0 20px; 
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.container {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: center;
+    align-items: center;
+    padding: 20px; 
+}
+
+.panel {
+    width: 100%;
+    max-width: 75%;
+    margin-bottom: 20px;
+}
+
+.chatbox {
+    border: 2px solid black; /* Add border around the chatbox */
+    padding: 20px; /* Add padding inside the border */
+    max-width: 100%; /* Set maximum width for the chatbox */
+    overflow-y: auto; /* Add scroll bar when content exceeds box height */
+    height: 300px; /* Set fixed height for the chatbox */
+}
+
+.input-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#user-message {
+    flex: 1;
+    margin-right: 10px;
+}
+
+button {
+    height: 100%; /* Ensure button height matches the textarea */
+}
