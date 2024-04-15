@@ -33,40 +33,70 @@
     <script>
         // Define initial message from chatbot
         var initialMessage = "How can I help?";
+        var messages = document.getElementById("messages");
 
         // Display initial message from chatbot
-        var messages = document.getElementById("messages");
         var initialMessageDiv = document.createElement("div");
         initialMessageDiv.textContent = "Socrates: " + initialMessage;
         messages.appendChild(initialMessageDiv);
 
+        // Load responses from movie_lines.txt
+        var responses = {};
+
+        // Function to load responses from text file
+        function loadResponses() {
+            fetch('movie_lines.txt')
+                .then(response => response.text())
+                .then(data => {
+                    var lines = data.split('\n');
+                    for (var i = 0; i < lines.length; i++) {
+                        var parts = lines[i].split(' +++$+++ ');
+                        if (parts.length === 5) {
+                            responses[parts[0].trim()] = parts[4].trim();
+                        }
+                    }
+                });
+        }
+
+        loadResponses();
+
         // Function to send message
         function sendMessage() {
             var userMessage = document.getElementById("user-message").value;
-            var messages = document.getElementById("messages");
 
             // Display user message
             var userMessageDiv = document.createElement("div");
-            userMessageDiv.textContent = userMessage;
+            userMessageDiv.textContent = "User: " + userMessage;
             userMessageDiv.className = "message-container user-message right";
             messages.appendChild(userMessageDiv);
+
+            // Get Eliza's response
+            var elizaResponse = getElizaResponse(userMessage);
+
+            // Display Eliza's response with the Socrates icon
+            var replyMessageDiv = document.createElement("div");
+            var socratesIcon = document.createElement("img");
+            socratesIcon.src = "socrates.jpg"; // Path to Socrates icon
+            socratesIcon.alt = "Socrates Icon";
+            socratesIcon.className = "philosopher-icon"; // Add class for styling
+            replyMessageDiv.appendChild(socratesIcon);
+            var responseText = document.createTextNode("Socrates: " + elizaResponse);
+            replyMessageDiv.appendChild(responseText);
+            replyMessageDiv.className = "message-container chatbot-message left";
+            messages.appendChild(replyMessageDiv);
+
+            // Display user icon
+            var userIcon = document.createElement("img");
+            userIcon.src = "user.jpg"; // Path to user icon
+            userIcon.alt = "User Icon";
+            userIcon.className = "user-icon"; // Add class for styling
+            userMessageDiv.appendChild(userIcon);
 
             // Clear input
             document.getElementById("user-message").value = "";
 
             // Scroll to the bottom of the chatbox
             messages.scrollTop = messages.scrollHeight;
-
-            // Simulate reply from chatbot
-            setTimeout(function() {
-                var replyMessageDiv = document.createElement("div");
-                replyMessageDiv.innerHTML = '<img src="socrates.jpg" alt="Socrates Icon" class="icon"> Thank you for your message! I\'ll get back to you soon.';
-                replyMessageDiv.className = "message-container chatbot-message left";
-                messages.appendChild(replyMessageDiv);
-
-                // Scroll to the bottom of the chatbox after receiving the reply
-                messages.scrollTop = messages.scrollHeight;
-            }, 1000); // Simulating delay for response
         }
 
         // Function to handle key down event in textarea
@@ -74,6 +104,16 @@
             if (event.key === "Enter") {
                 event.preventDefault(); // Prevent default Enter key behavior (line break)
                 sendMessage(); // Call sendMessage function
+            }
+        }
+
+        // Function to get Eliza's response
+        function getElizaResponse(message) {
+            message = message.toLowerCase(); // Convert message to lowercase for case-insensitive matching
+            if (responses.hasOwnProperty(message)) {
+                return responses[message];
+            } else {
+                return "I'm not sure I understand. Can you please rephrase?";
             }
         }
     </script>
