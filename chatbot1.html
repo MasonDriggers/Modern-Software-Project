@@ -61,43 +61,48 @@
         loadResponses();
 
         // Function to send message
-        function sendMessage() {
-            var userMessage = document.getElementById("user-message").value;
+    function sendMessage() {
+    var userMessage = document.getElementById("user-message").value;
 
-            // Display user message
-            var userMessageDiv = document.createElement("div");
-            userMessageDiv.textContent = "User: " + userMessage;
-            userMessageDiv.className = "message-container user-message right";
-            messages.appendChild(userMessageDiv);
+    // Display user message
+    var userMessageDiv = document.createElement("div");
+    userMessageDiv.className = "message-container user-message right";
 
-            // Get Eliza's response
-            var elizaResponse = getElizaResponse(userMessage);
+    // Create and prepend user icon
+    var userIcon = document.createElement("img");
+    userIcon.src = "user.jpg"; // Path to user icon
+    userIcon.alt = "User Icon";
+    userIcon.className = "user-icon"; // Add class for styling
+    userMessageDiv.appendChild(userIcon);
 
-            // Display Eliza's response with the Socrates icon
-            var replyMessageDiv = document.createElement("div");
-            var socratesIcon = document.createElement("img");
-            socratesIcon.src = "socrates.jpg"; // Path to Socrates icon
-            socratesIcon.alt = "Socrates Icon";
-            socratesIcon.className = "philosopher-icon"; // Add class for styling
-            replyMessageDiv.appendChild(socratesIcon);
-            var responseText = document.createTextNode("Socrates: " + elizaResponse);
-            replyMessageDiv.appendChild(responseText);
-            replyMessageDiv.className = "message-container chatbot-message left";
-            messages.appendChild(replyMessageDiv);
+    var messageText = document.createElement("span");
+    messageText.textContent = "User: " + userMessage;
+    userMessageDiv.appendChild(messageText);
 
-            // Display user icon
-            var userIcon = document.createElement("img");
-            userIcon.src = "user.jpg"; // Path to user icon
-            userIcon.alt = "User Icon";
-            userIcon.className = "user-icon"; // Add class for styling
-            userMessageDiv.appendChild(userIcon);
+    messages.appendChild(userMessageDiv);
 
-            // Clear input
-            document.getElementById("user-message").value = "";
+    // Assume a function to get the chatbot response
+    var chatbotResponse = getElizaResponse(userMessage); // Function to fetch response
 
-            // Scroll to the bottom of the chatbox
-            messages.scrollTop = messages.scrollHeight;
-        }
+    // Display chatbot's response as before
+    var replyMessageDiv = document.createElement("div");
+    var socratesIcon = document.createElement("img");
+    socratesIcon.src = "socrates.jpg"; // Path to Socrates icon
+    socratesIcon.alt = "Socrates Icon";
+    socratesIcon.className = "philosopher-icon"; // Add class for styling
+    replyMessageDiv.appendChild(socratesIcon);
+
+    var responseText = document.createTextNode("Socrates: " + chatbotResponse);
+    replyMessageDiv.appendChild(responseText);
+    replyMessageDiv.className = "message-container chatbot-message left";
+    messages.appendChild(replyMessageDiv);
+
+    // Clear the input area
+    document.getElementById("user-message").value = "";
+    messages.scrollTop = messages.scrollHeight; // Auto-scroll to the latest message
+}
+
+
 
         // Function to handle key down event in textarea
         function handleKeyDown(event) {
@@ -113,7 +118,7 @@
             if (responses.hasOwnProperty(message)) {
                 return responses[message];
             } else {
-                return "I'm not sure I understand. Can you please rephrase?";
+                return "Thank you for your message! I'll get back to you soon.";
             }
         }
     </script>

@@ -1,3 +1,5 @@
+/* chatbot4.css */
+
 body, html {
     margin: 0;
     padding: 0;
@@ -7,6 +9,7 @@ body {
     background: linear-gradient(to right, #e18a26c2, #cd6633e3);
     font-family: Monaco, monospace;
     font-size: 16px;
+    
 }
 
 .black-bar {
@@ -25,4 +28,92 @@ body {
     font-weight: normal;
     margin: 0 20px; 
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.container {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: center;
+    align-items: center;
+    padding: 20px; 
+}
+
+.content-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.paragraph {
+    flex: 1; /* Take remaining space */
+    padding-right: 20px; /* Add right padding for spacing */
+    width: 70%;
+}
+
+.panel {
+    flex: 1; /* Take remaining space */
+}
+
+.chatbox {
+    border: 3px solid rgb(0, 0, 0); /* Add border around the chatbox */
+    background: linear-gradient(to top, #000000, #5a5252);
+    padding: 20px; /* Add padding inside the border */
+    max-width: 100%; /* Set maximum width for the chatbox */
+    overflow-y: auto; /* Add scroll bar when content exceeds box height */
+    height: 300px; /* Set fixed height for the chatbox */
+    color: white; /* Set text color to white */
+}
+
+.input-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Make the image circular */
+    margin-right: 5px; /* Add spacing between image and text */
+}
+
+.message-container {
+    margin-bottom: 10px; /* Add margin between messages */
+}
+
+.user-message {
+    background-color: #e18a26; /* Change background color for user messages */
+    color: white; /* Change text color for user messages */
+    border-radius: 10px; /* Add border radius for bubble effect */
+    padding: 10px; /* Add padding inside the bubble */
+    max-width: 70%; /* Limit the width of user messages */
+}
+
+.chatbot-message {
+    background-color: #2c3e50; /* Change background color for chatbot messages */
+    color: white; /* Change text color for chatbot messages */
+    border-radius: 10px; /* Add border radius for bubble effect */
+    padding: 10px; /* Add padding inside the bubble */
+    max-width: 70%; /* Limit the width of chatbot messages */
+}
+
+.right {
+    align-self: flex-end; /* Align messages to the right */
+}
+
+.left {
+    align-self: flex-start; /* Align messages to the left */
+}
+
+.philosopher-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Make the icon circular */
+}
+
+.user-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Make the icon circular */
 }

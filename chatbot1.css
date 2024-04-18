@@ -9,6 +9,7 @@ body {
     background: linear-gradient(to right, #e18a26c2, #cd6633e3);
     font-family: Monaco, monospace;
     font-size: 16px;
+    
 }
 
 .black-bar {
@@ -47,6 +48,7 @@ body {
 .paragraph {
     flex: 1; /* Take remaining space */
     padding-right: 20px; /* Add right padding for spacing */
+    width: 70%;
 }
 
 .panel {

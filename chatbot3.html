@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot Page</title>
+    <title>Maya Angelou</title>
     <link rel="stylesheet" href="chatbot3.css" />
-    
 </head>
 <body>
-    
     <div class="black-bar">
         <a href="index.html" class="bar-link">HOME</a>
         <a href="chatbot1.html" class="bar-link">SOCRATES</a>
@@ -17,23 +15,21 @@
         <a href="chatbot4.html" class="bar-link">MARCUS AURELIUS</a>
     </div>
     <div class="container">
-        <div class="panel">
-            <div class="author-info">
-                <h2>Your therapist is in: 
-                    Maya Angelou</h2>
-                <p>Maya Angelou (1928-2014) was an American poet, memoirist, and civil rights activist. 
-                    Born Marguerite Annie Johnson in St. Louis, Missouri, she faced racial discrimination and trauma during her early years, experiences that would shape much of her later work. 
-                    Angelou's literary career flourished with her acclaimed autobiography "I Know Why the Caged Bird Sings," which detailed her childhood struggles. 
-                    She went on to write numerous volumes of poetry, essays, and autobiographies, earning widespread acclaim and accolades, including the Presidential Medal of Freedom. 
-                    Angelou's writing celebrated resilience, hope, and the power of the human spirit, making her a beloved and influential figure in American literature.</p>
-                <button onclick="sendMessage()">Send a Message</button>
-                <textarea id="user-message" placeholder="Type your message..."></textarea>
-            </div>
+        <h2>Your therapist is in: Maya Angelou</h2>
+        <div class="paragraph">
+            <p>Maya Angelou (1928-2014) was an American poet, memoirist, and civil rights activist. 
+                Born Marguerite Annie Johnson in St. Louis, Missouri, she faced racial discrimination and trauma during her early years, experiences that would shape much of her later work. 
+                Angelou's literary career flourished with her acclaimed autobiography "I Know Why the Caged Bird Sings," which detailed her childhood struggles. 
+                She went on to write numerous volumes of poetry, essays, and autobiographies, earning widespread acclaim and accolades, including the Presidential Medal of Freedom. 
+                Angelou's writing celebrated resilience, hope, and the power of the human spirit, making her a beloved and influential figure in American literature.</p>
         </div>
         <div class="panel chatbot">
-            <!-- Chatbot interface goes here -->
-            <div id="chat">
+            <div id="chat" class="chatbox">
                 <div id="messages"></div>
+                <div class="input-area">
+                    <textarea id="user-message" placeholder="Type your message here..." onkeydown="handleKeyDown(event)"></textarea>
+                    <button onclick="sendMessage()">Send a Message</button>
+                </div>
             </div>
         </div>
     </div>
@@ -41,32 +37,91 @@
     <script>
         // Define initial message from chatbot
         var initialMessage = "How can I help?";
+        var messages = document.getElementById("messages");
 
         // Display initial message from chatbot
-        var messages = document.getElementById("messages");
         var initialMessageDiv = document.createElement("div");
-        initialMessageDiv.textContent = "Maya Angelou: " + initialMessage;
+        initialMessageDiv.textContent = "Angelou: " + initialMessage;
         messages.appendChild(initialMessageDiv);
+
+        // Load responses from movie_lines.txt
+        var responses = {};
+
+        // Function to load responses from text file
+        function loadResponses() {
+            fetch('movie_lines.txt')
+                .then(response => response.text())
+                .then(data => {
+                    var lines = data.split('\n');
+                    for (var i = 0; i < lines.length; i++) {
+                        var parts = lines[i].split(' +++$+++ ');
+                        if (parts.length === 5) {
+                            responses[parts[0].trim()] = parts[4].trim();
+                        }
+                    }
+                });
+        }
+
+        loadResponses();
 
         // Function to send message
         function sendMessage() {
             var userMessage = document.getElementById("user-message").value;
-            var messages = document.getElementById("messages");
 
             // Display user message
             var userMessageDiv = document.createElement("div");
-            userMessageDiv.textContent = "You: " + userMessage;
+            userMessageDiv.className = "message-container user-message right";
+
+            // Create and prepend user icon
+            var userIcon = document.createElement("img");
+            userIcon.src = "user.jpg"; // Path to user icon
+            userIcon.alt = "User Icon";
+            userIcon.className = "user-icon"; // Add class for styling
+            userMessageDiv.appendChild(userIcon);
+
+            var messageText = document.createElement("span");
+            messageText.textContent = "User: " + userMessage;
+            userMessageDiv.appendChild(messageText);
+
             messages.appendChild(userMessageDiv);
 
-            // Clear input
-            document.getElementById("user-message").value = "";
+            // Assume a function to get the chatbot response
+            var chatbotResponse = getElizaResponse(userMessage); // Function to fetch response
 
-            // Simulate reply from chatbot
-            setTimeout(function() {
-                var replyMessageDiv = document.createElement("div");
-                replyMessageDiv.textContent = "Maya Angelou: Thank you for your message! I'll get back to you soon.";
-                messages.appendChild(replyMessageDiv);
-            }, 1000); // Simulating delay for response
+            // Display chatbot's response as before
+            var replyMessageDiv = document.createElement("div");
+            var angelouIcon = document.createElement("img");
+            angelouIcon.src = "angelou.jpg"; // Path to Angelou icon
+            angelouIcon.alt = "Angelou Icon";
+            angelouIcon.className = "philosopher-icon"; // Add class for styling
+            replyMessageDiv.appendChild(angelouIcon);
+
+            var responseText = document.createTextNode("Angelou: " + chatbotResponse);
+            replyMessageDiv.appendChild(responseText);
+            replyMessageDiv.className = "message-container chatbot-message left";
+            messages.appendChild(replyMessageDiv);
+
+            // Clear the input area
+            document.getElementById("user-message").value = "";
+            messages.scrollTop = messages.scrollHeight; // Auto-scroll to the latest message
+        }
+
+        // Function to handle key down event in textarea
+        function handleKeyDown(event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // Prevent default Enter key behavior (line break)
+                sendMessage(); // Call sendMessage function
+            }
+        }
+
+        // Function to get Eliza's response
+        function getElizaResponse(message) {
+            message = message.toLowerCase(); // Convert message to lowercase for case-insensitive matching
+            if (responses.hasOwnProperty(message)) {
+                return responses[message];
+            } else {
+                return "Thank you for your message! I'll get back to you soon.";
+            }
         }
     </script>
 </body>
