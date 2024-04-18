@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>William Shakespeare</title>
+    <link rel="stylesheet" href="chatbot1.css" />
+</head>
+<body>
+    <div class="black-bar">
+        <a href="index.html" class="bar-link">HOME</a>
+        <a href="chatbot1.html" class="bar-link">SOCRATES</a>
+        <a href="chatbot2.html" class="bar-link">WILLIAM SHAKESPEARE</a>
+        <a href="chatbot3.html" class="bar-link">MAYA ANGELOU</a>
+        <a href="chatbot4.html" class="bar-link">MARCUS AURELIUS</a>
+    </div>
+    <div class="container">
+        <h2>YOUR THERAPIST IS IN: William Shakespeare</h2>
+        <div class="paragraph">
+            <p>William Shakespeare (1564-1616) was an English playwright, poet, and actor, 
+                widely regarded as one of the greatest writers in the English language and the 
+                world's pre-eminent dramatist. Born in Stratford-upon-Avon, he produced a vast body 
+                of work, including 39 plays, 154 sonnets, and two long narrative poems. His plays 
+                explore themes of love, power, ambition, and the human condition with unparalleled 
+                depth and insight. Some of his most famous works include "Romeo and Juliet," "Hamlet," 
+                "Macbeth," and "Othello." Shakespeare's enduring influence on literature, theatre, and 
+                language ensures his place as a cultural icon whose works continue to be studied and 
+                performed globally.</p>
+        </div>
+        <div class="panel chatbot">
+            <div id="chat" class="chatbox">
+                <div id="messages"></div>
+                <div class="input-area">
+                    <textarea id="user-message" placeholder="Type your message here..." onkeydown="handleKeyDown(event)"></textarea>
+                    <button onclick="sendMessage()">Send a Message</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Define initial message from chatbot
+        var initialMessage = "How can I help?";
+        var messages = document.getElementById("messages");
+
+        // Display initial message from chatbot
+        var initialMessageDiv = document.createElement("div");
+        initialMessageDiv.textContent = "Shakespeare: " + initialMessage;
+        messages.appendChild(initialMessageDiv);
+
+        // Load responses from movie_lines.txt
+        var responses = {};
+
+        // Function to load responses from text file
+        function loadResponses() {
+            fetch('movie_lines.txt')
+                .then(response => response.text())
+                .then(data => {
+                    var lines = data.split('\n');
+                    for (var i = 0; i < lines.length; i++) {
+                        var parts = lines[i].split(' +++$+++ ');
+                        if (parts.length === 5) {
+                            responses[parts[0].trim()] = parts[4].trim();
+                        }
+                    }
+                });
+        }
+
+        loadResponses();
+
+        // Function to send message
+    function sendMessage() {
+    var userMessage = document.getElementById("user-message").value;
+
+    // Display user message
+    var userMessageDiv = document.createElement("div");
+    userMessageDiv.className = "message-container user-message right";
+
+    // Create and prepend user icon
+    var userIcon = document.createElement("img");
+    userIcon.src = "user.jpg"; // Path to user icon
+    userIcon.alt = "User Icon";
+    userIcon.className = "user-icon"; // Add class for styling
+    userMessageDiv.appendChild(userIcon);
+
+    var messageText = document.createElement("span");
+    messageText.textContent = "User: " + userMessage;
+    userMessageDiv.appendChild(messageText);
+
+    messages.appendChild(userMessageDiv);
+
+    // Assume a function to get the chatbot response
+    var chatbotResponse = getElizaResponse(userMessage); // Function to fetch response
+
+    // Display chatbot's response as before
+    var replyMessageDiv = document.createElement("div");
+    var socratesIcon = document.createElement("img");
+    socratesIcon.src = "shakespeare.jpg"; // Path to Socrates icon
+    socratesIcon.alt = "Shakespeare Icon";
+    socratesIcon.className = "philosopher-icon"; // Add class for styling
+    replyMessageDiv.appendChild(socratesIcon);
+
+    var responseText = document.createTextNode("Shakespeare: " + chatbotResponse);
+    replyMessageDiv.appendChild(responseText);
+    replyMessageDiv.className = "message-container chatbot-message left";
+    messages.appendChild(replyMessageDiv);
+
+    // Clear the input area
+    document.getElementById("user-message").value = "";
+    messages.scrollTop = messages.scrollHeight; // Auto-scroll to the latest message
+}
+
+
+
+        // Function to handle key down event in textarea
+        function handleKeyDown(event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // Prevent default Enter key behavior (line break)
+                sendMessage(); // Call sendMessage function
+            }
+        }
+
+        // Function to get Eliza's response
+        function getElizaResponse(message) {
+            message = message.toLowerCase(); // Convert message to lowercase for case-insensitive matching
+            if (responses.hasOwnProperty(message)) {
+                return responses[message];
+            } else {
+                return "Thank you for your message! I'll get back to you soon.";
+            }
+        }
+    </script>
+</body>
+</html>
