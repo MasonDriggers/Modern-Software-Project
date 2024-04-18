@@ -9,28 +9,62 @@
         "Is anyone there?",
         "Hello",
         "Good day",
-        "What's up?"
+        "What's up?",
+        "Good morning",
+        "afternoon",
+        "evening"
       ],
-      "responses": [
+      "responses": [[
         "Hello",
         "Hello, thanks for visiting",
         "Hi there, what can I do for you?",
         "Hi there, how can I help?"
-      ]
+      ],
+      ["Ah, greetings! May the pursuit of knowledge be thy guiding star as we traverse the vast expanse of thought.",
+      "Hail, fellow wanderer in the realm of ideas! What thoughts dost thou wish to ponder or unravel in our discourse?",
+      "Well met, curious soul! Pray, share thy thoughts or questions, and let us engage in the pursuit of truth and understanding"], 
+      ["Hail and well met, good stranger! What tidings bring thee to this digital realm?",
+      "Ah, greetings! Thy salutation doth pierce the silence like a clarion call in the dead of night.",
+      "Hello, fair traveler of the internet! Pray, what doth prompt thee to cross paths with this humble scribe?",
+      "Good morrow, kind soul! Thy presence doth illuminate this virtual stage with a radiant glow."],
+      ["Hello, my dear. Your arrival is a symphony to the day.",
+      "Hey there, you bring warmth like the morning sun.",
+      "Good day to you. May your journey be one of hope and love."]
+    ]
     },
     {
       "tag": "goodbye",
-      "patterns": ["Bye", "See you later", "Goodbye"],
-      "responses": [
+      "patterns": [
+        "Bye", "See you later", "Goodbye"
+      ],
+      "responses": [[
         "See you later, thanks for visiting",
         "Have a nice day",
         "Bye! Come back again soon."
-      ]
+      ], 
+      ["Farewell, dear friend, may our paths cross again like streams converging in the vast expanse of time.",
+      "With a parting sigh, I bid thee farewell, and may the journey ahead be filled with laughter, love, and serenity.",
+      "Until we meet again, let memories of our time together be a beacon of warmth on the coldest of nights."],
+      ["Go forth with a light heart and a merry tune upon thy lips, and may fortune smile upon thee wherever thou dost roam.",
+      "With a parting sigh, I bid thee farewell, and may the journey ahead be as gentle as a breeze caressing the meadows at dawn.",
+      "May the day ahead be as radiant as a field of wildflowers in bloom, and may thy journey be graced with moments of pure joy and contentment."],
+      ["Farewell, child. May you walk in the light of your dreams.",
+      "Goodbye for now. Let your spirit soar like a songbird.",
+      "See you later, my friend. Carry joy in your heart."]]
     },
     {
       "tag": "thanks",
       "patterns": ["Thanks", "Thank you", "That's helpful", "Thank's a lot!"],
-      "responses": ["Happy to help!", "Any time!", "My pleasure"]
+      "responses": [["Happy to help!", "It is my duty to help others", "It is my pleasure to assist you"], 
+      ["The pleasure was mine, dear friend. Fare thee well, and may the kindness thou hast shown be returned to thee tenfold.",
+      "Gratitude doth warm the heart like a hearth's gentle fire. Go forth with renewed strength, and may fortune smile upon thee.",
+      "In aiding thee, I find solace and purpose. Shouldst thou ever require aid again, hesitate not to seek my counsel."],
+      ["With a heart filled with thanks, let us face the world as comrades united in purpose and goodwill.",
+      "Thou art most welcome, dear friend. May the warmth of gratitude kindle a flame of joy in thy heart.",
+      "Tis but a small token of friendship extended, yet know that thou art cherished and valued beyond measure."],
+      ["Thank you for your gratitude, it is a gift to my soul.",
+      "Your thanks are like the bloom of a rose. I cherish them.",
+      "It's my pleasure, my dear, as natural as the sun's rise."]]
     },
     {
       "tag": "sad",
@@ -39,11 +73,20 @@
         "I feel sad",
         "I feel bad"
       ],
-      "responses": [
+      "responses": [[
         "Dwell on the beauty of life. Watch the stars, and see yourself running with them.",
         "The happiness of your life depends upon the quality of your thoughts.",
         "When you arise in the morning think of what a privilege it is to be alive, to think, to enjoy, to love ..."
-      ]
+      ], 
+      ["The melancholy of the soul weighs heavy indeed. Know that even in the depths of sadness, the seeds of joy lie dormant, awaiting but the gentle touch of time and care to flourish.",
+      "To feel sadness is to be human, my friend. Let it not define thee, but rather serve as a reminder of the depth and richness of the human experience.",
+      "Sadness, like a tempest, may rage within the heart. Yet let us not forget that storms, too, shall pass, leaving behind clear skies and calm seas."],
+      ["Sorrow doth weigh upon thy spirit like a leaden cloak. Let not despair hold thee in its grasp, for hope yet flickers in the darkest of nights",
+      "In the garden of thy heart, sadness may bloom like a solitary flower. But fret not, for amidst the thorns, joy awaits, ready to unfurl its petals in due time.",
+      "The river of tears may flow freely today, yet it shall carve a path to greater strength and understanding. Take solace, for even in sadness, there lies the seed of wisdom."],
+      ["Let your tears water the seeds of your joy yet to come.",
+      "Your sadness is a chapter, not the whole story. Hold on.",
+      "Remember, the rainbow follows the storm. Believe in your strength."]]
     },
     {
       "tag": "angry",
@@ -52,35 +95,68 @@
         "I am angry",
         "I hate this person"
       ],
-      "responses": [
+      "responses": [[
         "The best revenge is to be unlike him who performed the injury.",
         "The soul becomes dyed with the colour of its thoughts.",
         "Whenever you are about to find fault with someone, ask yourself the following question: What fault of mine most nearly resembles the one I am about to criticize?"
-      ]
+      ],
+      ["Tell me, what has stirred such strong emotions in you today? Is there a belief or judgment that underpins your anger that we might examine together?",
+      "Does this anger serve you well? Does it lead to a better outcome for you or for others? Might there be a more productive response that would benefit all involved?",
+      "Are you certain that the actions or words that provoked your anger were intended as you perceived them? Could there perhaps be another interpretation worth considering?"],
+      ["Ah, the flame of anger, a tempest that rages within. Take heed, lest it consume thee whole, and seek solace in the cool waters of reason.",
+      "Like a storm upon the sea, anger may churn the waters of the soul. Yet in the calm of introspection lies the key to mastering its fury.",
+      "Anger, a fire that burns bright and fierce. Channel its energy into productive action, lest it consume thee with its unbridled heat."],
+      ["Anger can light a fire, but you must guide it with care.",
+      "Your soul needs peace. Seek to understand what fuels the fire.",
+      "Breathe deeply, and let the embers of anger cool."]]
     },
     {
       "tag": "worry",
       "patterns": [
         "I'm worried",
+        "I'm worried about a",
+        "I'm worried about an exam",
+        "I am stressed about schoolwork",
+        "I am concerned about my money problems",
         "I am anxious",
-        "concern"
+        "concern",
+        "stress"
       ],
-      "responses": [
+      "responses": [[
         "If you are distressed by anything external, the pain is not due to the thing itself, but to your estimate of it; and this you have the power to revoke at any moment.",
         "Never let the future disturb you. You will meet it, if you have to, with the same weapons of reason which today arm you against the present."
-      ]
+      ], 
+      ["In times of uncertainty, the mind may feel adrift upon a sea of indecision. Take pause, breathe deeply, and trust that clarity shall emerge from the depths of contemplation.",
+      "The canvas of choice lies before thee, yet the brush of uncertainty may stay thy hand. Fear not the blank page, for within thee lies the creative spark to paint the future as thou dost desire.",
+      "When the road ahead seems shrouded in fog, trust in the compass of thy heart to steer thee true. Though the journey may be uncertain, the destination awaits with open arms."],
+      ["In the labyrinth of uncertainty, let not despair be thy guide. Seek counsel from within, and the path forward shall reveal itself in due time.",
+      "Though the road ahead may seem obscured by shadows, take solace in the knowledge that even the dimmest light can illuminate the way",
+      "In the vast expanse of possibility, let not hesitation bind thee. Take a step, however small, and trust that the journey shall unfold with each stride."],
+      ["Worries are clouds in your sky. Let them drift away.",
+      "In your times of concern, hold on to your truth and courage.",
+      "Trust in the strength of your spirit. It knows the way."]]
     },
     {
-      "tag": "funny",
-      "patterns": [
-        "Tell me a joke!",
-        "Tell me something funny!",
-        "Do you know a joke?"
-      ],
-      "responses": [
-        "Why did the hipster burn his mouth? He drank the coffee before it was cool.",
-        "What did the buffalo say when his son left for college? Bison."
-      ]
+      "tag": "problem",
+        "patterns": [
+          "I have a problem",
+          "I have an issue",
+          "I need advice",
+          "Help me"
+        ],
+        "responses": [[
+          "Please go on",
+          "I hope I can help"
+        ], 
+        ["In times of need, the wise seek counsel. Tell me, what aid dost thou require, and I shall offer what knowledge and guidance I possess.",
+        "To recognize one's limitations is the mark of wisdom. Fear not to ask for assistance, for in collaboration lies the path to resolution.",
+        "A cry for help is a testament to strength, not weakness. Share thy burden, and let us work together to lighten its weight."],
+        ["I shall lend mine ear to thy grievance.",
+        "Despair not, for thou art not alone in thy struggle. Speak thy troubles, and together we shall seek a remedy.",
+        "Be not dismayed, for help is at hand. What vexes thee, that I may offer my counsel and aid?"],
+        ["Your journey has its trials. Let us walk together through them.",
+        "Your challenges are but steps on the path to wisdom.",
+        "Your voice holds power. Share your burdens, and let me hear them."]]
     }
   ]
 }

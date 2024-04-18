@@ -1,6 +1,6 @@
 import random
 import json
-
+from conversationalBot import chat
 import torch
 
 from model import NeuralNet
@@ -25,7 +25,14 @@ model = NeuralNet(input_size, hidden_size, output_size).to(device)
 model.load_state_dict(model_state)
 model.eval()
 
-bot_name = "Aurelius"
+philoChoice = 1
+switcher = {
+    0: "Aurelius",
+    1: "Aristotle",
+    2: "Shakespeare",
+    3: "Angelou",
+}
+bot_name = switcher.get(philoChoice)
 print("Let's chat! (type 'quit' to exit)")
 while True:
     isEnded = False
@@ -46,15 +53,16 @@ while True:
 
     probs = torch.softmax(output, dim=1)
     prob = probs[0][predicted.item()]
+    # It started as > 75
     if prob.item() > 0.75:
+        print(tag, "prob is", prob.item())
         for intent in intents['intents']:
             if tag == intent["tag"]:
-                print(f"{bot_name}: {random.choice(intent['responses'])}")
-                print('tag = ' + intent['tag'])
+                print(f"{bot_name}: {random.choice(intent['responses'][philoChoice])}")
                 if intent['tag'] == "goodbye":
-                    print('Ended chat')
                     isEnded = True
     else:
-        print(f"{bot_name}: I do not understand English very well, please clarify your response")
+        print("goto other conversational bot")
+        chat(sentence, bot_name)
     if isEnded:
         break
