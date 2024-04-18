@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcus Aurelius</title>
+    <link rel="stylesheet" href="chatbot1.css" />
+</head>
+<body>
+    <div class="black-bar">
+        <a href="index.html" class="bar-link">HOME</a>
+        <a href="chatbot1.html" class="bar-link">SOCRATES</a>
+        <a href="chatbot2.html" class="bar-link">WILLIAM SHAKESPEARE</a>
+        <a href="chatbot3.html" class="bar-link">MAYA ANGELOU</a>
+        <a href="chatbot4.html" class="bar-link">MARCUS AURELIUS</a>
+    </div>
+    <div class="container">
+        <h2>YOUR THERAPIST IS IN: Marcus Aurelius</h2>
+        <div class="paragraph">
+            <p>Marcus Aurelius (121-180 AD) was a Roman Emperor and Stoic philosopher, known for his intellectual pursuits and contributions to philosophy. 
+                Born in Rome, he became Emperor in 161 AD, ruling over the Roman Empire during a time of military conflict and political instability. 
+                Aurelius is best remembered for his "Meditations," a series of personal writings reflecting on Stoic philosophy and offering guidance on living a virtuous life amidst adversity. 
+                His philosophical reflections delve into themes such as the importance of self-discipline, acceptance of fate, and the pursuit of wisdom. 
+                Marcus Aurelius' legacy endures as one of the most influential figures in Stoic philosophy and Roman history.</p>
+        </div>
+        <div class="panel chatbot">
+            <div id="chat" class="chatbox">
+                <div id="messages"></div>
+                <div class="input-area">
+                    <textarea id="user-message" placeholder="Type your message here..." onkeydown="handleKeyDown(event)"></textarea>
+                    <button onclick="sendMessage()">Send a Message</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var initialMessage = "How can I help?";
+        var messages = document.getElementById("messages");
+
+        var initialMessageDiv = document.createElement("div");
+        initialMessageDiv.textContent = "Marcus Aurelius: " + initialMessage;
+        messages.appendChild(initialMessageDiv);
+
+        var responses = {};
+
+        function loadResponses() {
+            fetch('movie_lines.txt')
+                .then(response => response.text())
+                .then(data => {
+                    var lines = data.split('\n');
+                    for (var i = 0; i < lines.length; i++) {
+                        var parts = lines[i].split(' +++$+++ ');
+                        if (parts.length === 5) {
+                            responses[parts[0].trim()] = parts[4].trim();
+                        }
+                    }
+                });
+        }
+
+        loadResponses();
+
+        function sendMessage() {
+            var userMessage = document.getElementById("user-message").value;
+            var userMessageDiv = document.createElement("div");
+            userMessageDiv.className = "message-container user-message right";
+            var userIcon = document.createElement("img");
+            userIcon.src = "user.jpg";
+            userIcon.alt = "User Icon";
+            userIcon.className = "user-icon";
+            userMessageDiv.appendChild(userIcon);
+
+            var messageText = document.createElement("span");
+            messageText.textContent = "User: " + userMessage;
+            userMessageDiv.appendChild(messageText);
+
+            messages.appendChild(userMessageDiv);
+
+            var chatbotResponse = getElizaResponse(userMessage);
+
+            var replyMessageDiv = document.createElement("div");
+            var aureliusIcon = document.createElement("img");
+            aureliusIcon.src = "aurelius.jpg";
+            aureliusIcon.alt = "Marcus Aurelius Icon";
+            aureliusIcon.className = "philosopher-icon";
+            replyMessageDiv.appendChild(aureliusIcon);
+
+            var responseText = document.createTextNode("Marcus Aurelius: " + chatbotResponse);
+            replyMessageDiv.appendChild(responseText);
+            replyMessageDiv.className = "message-container chatbot-message left";
+            messages.appendChild(replyMessageDiv);
+
+            document.getElementById("user-message").value = "";
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function handleKeyDown(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+
+        function getElizaResponse(message) {
+            message = message.toLowerCase();
+            if (responses.hasOwnProperty(message)) {
+                return responses[message];
+            } else {
+                return "Thank you for your message! I'll get back to you soon.";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+/* index.css */
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(to right, #e18a26c2, #cd6633e3);
+    font-family: Monaco, monospace;
+    font-size: 16px;
+}
+
+.container {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: center;
+    align-items: center;
+    padding: 20px; 
+}
+
+.black-bar {
+    background-color: black;
+    height: 40px; /* Increased height for better visibility */
+    width: 100%;
+    display: flex;
+    align-items: center; /* Center-align text vertically */
+    justify-content: center; /* Center-align text horizontally */
+}
+
+.bar-link {
+    color: rgb(237, 121, 63); 
+    text-decoration: none;
+    font-size: 14pt;
+    font-weight: normal;
+    margin: 0 20px; 
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;}
+
+    .text-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        max-width: 75%; /* Set maximum width for text container */
+        margin-bottom: 20px; /* Add margin bottom for spacing */
+    }
+    
+    .paragraph-box {
+        border: 2px solid black; /* Add border around the paragraph */
+        padding: 20px; /* Add padding inside the border */
+    }
+    
+
+h1, p {
+    width: 100%; /* Take full width */
+    text-align: center; /* Center-align */
+}
+
+.image-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%; /* Take full width */
+    flex-wrap: wrap;
+}
+
+.image-container a {
+    flex: 0 0 23%;
+    text-decoration: none;
+}
+
+.image-container img {
+    width: 300px;
+    height: 300px;
+    margin-bottom: 10px;
+    border: 3px solid black;
+}
+
+a {
+    color: black;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+h1 {
+    font-size: 48px; /* Added 'px' unit */
+    text-align: left;
+}
+
+p {
+    text-align: left;
+    font-size: 16pt;
+}
