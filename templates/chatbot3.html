@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marcus Aurelius</title>
-    <link rel="stylesheet" href="chatbot1.css" />
+    <title>Maya Angelou</title>
+    <link rel="stylesheet" href="chatbot3.css" />
 </head>
 <body>
     <div class="black-bar">
@@ -15,13 +15,13 @@
         <a href="chatbot4.html" class="bar-link">MARCUS AURELIUS</a>
     </div>
     <div class="container">
-        <h2>YOUR THERAPIST IS IN: Marcus Aurelius</h2>
+        <h2>YOUR THERAPIST IS IN: MAYA ANGELOU</h2>
         <div class="paragraph">
-            <p>Marcus Aurelius (121-180 AD) was a Roman Emperor and Stoic philosopher, known for his intellectual pursuits and contributions to philosophy. 
-                Born in Rome, he became Emperor in 161 AD, ruling over the Roman Empire during a time of military conflict and political instability. 
-                Aurelius is best remembered for his "Meditations," a series of personal writings reflecting on Stoic philosophy and offering guidance on living a virtuous life amidst adversity. 
-                His philosophical reflections delve into themes such as the importance of self-discipline, acceptance of fate, and the pursuit of wisdom. 
-                Marcus Aurelius' legacy endures as one of the most influential figures in Stoic philosophy and Roman history.</p>
+            <p>Maya Angelou (1928-2014) was an American poet, memoirist, and civil rights activist. 
+                Born Marguerite Annie Johnson in St. Louis, Missouri, she faced racial discrimination and trauma during her early years, experiences that would shape much of her later work. 
+                Angelou's literary career flourished with her acclaimed autobiography "I Know Why the Caged Bird Sings," which detailed her childhood struggles. 
+                She went on to write numerous volumes of poetry, essays, and autobiographies, earning widespread acclaim and accolades, including the Presidential Medal of Freedom. 
+                Angelou's writing celebrated resilience, hope, and the power of the human spirit, making her a beloved and influential figure in American literature.</p>
         </div>
         <div class="panel chatbot">
             <div id="chat" class="chatbox">
@@ -35,15 +35,19 @@
     </div>
 
     <script>
+        // Define initial message from chatbot
         var initialMessage = "How can I help?";
         var messages = document.getElementById("messages");
 
+        // Display initial message from chatbot
         var initialMessageDiv = document.createElement("div");
-        initialMessageDiv.textContent = "Marcus Aurelius: " + initialMessage;
+        initialMessageDiv.textContent = "Angelou: " + initialMessage;
         messages.appendChild(initialMessageDiv);
 
+        // Load responses from movie_lines.txt
         var responses = {};
 
+        // Function to load responses from text file
         function loadResponses() {
             fetch('movie_lines.txt')
                 .then(response => response.text())
@@ -60,14 +64,19 @@
 
         loadResponses();
 
+        // Function to send message
         function sendMessage() {
             var userMessage = document.getElementById("user-message").value;
+
+            // Display user message
             var userMessageDiv = document.createElement("div");
             userMessageDiv.className = "message-container user-message right";
+
+            // Create and prepend user icon
             var userIcon = document.createElement("img");
-            userIcon.src = "user.jpg";
+            userIcon.src = "user.jpg"; // Path to user icon
             userIcon.alt = "User Icon";
-            userIcon.className = "user-icon";
+            userIcon.className = "user-icon"; // Add class for styling
             userMessageDiv.appendChild(userIcon);
 
             var messageText = document.createElement("span");
@@ -76,33 +85,38 @@
 
             messages.appendChild(userMessageDiv);
 
-            var chatbotResponse = getElizaResponse(userMessage);
+            // Assume a function to get the chatbot response
+            var chatbotResponse = getElizaResponse(userMessage); // Function to fetch response
 
+            // Display chatbot's response as before
             var replyMessageDiv = document.createElement("div");
-            var aureliusIcon = document.createElement("img");
-            aureliusIcon.src = "aurelius.jpg";
-            aureliusIcon.alt = "Marcus Aurelius Icon";
-            aureliusIcon.className = "philosopher-icon";
-            replyMessageDiv.appendChild(aureliusIcon);
+            var angelouIcon = document.createElement("img");
+            angelouIcon.src = "angelou.jpg"; // Path to Angelou icon
+            angelouIcon.alt = "Angelou Icon";
+            angelouIcon.className = "philosopher-icon"; // Add class for styling
+            replyMessageDiv.appendChild(angelouIcon);
 
-            var responseText = document.createTextNode("Marcus Aurelius: " + chatbotResponse);
+            var responseText = document.createTextNode("Angelou: " + chatbotResponse);
             replyMessageDiv.appendChild(responseText);
             replyMessageDiv.className = "message-container chatbot-message left";
             messages.appendChild(replyMessageDiv);
 
+            // Clear the input area
             document.getElementById("user-message").value = "";
-            messages.scrollTop = messages.scrollHeight;
+            messages.scrollTop = messages.scrollHeight; // Auto-scroll to the latest message
         }
 
+        // Function to handle key down event in textarea
         function handleKeyDown(event) {
             if (event.key === "Enter") {
-                event.preventDefault();
-                sendMessage();
+                event.preventDefault(); // Prevent default Enter key behavior (line break)
+                sendMessage(); // Call sendMessage function
             }
         }
 
+        // Function to get Eliza's response
         function getElizaResponse(message) {
-            message = message.toLowerCase();
+            message = message.toLowerCase(); // Convert message to lowercase for case-insensitive matching
             if (responses.hasOwnProperty(message)) {
                 return responses[message];
             } else {
