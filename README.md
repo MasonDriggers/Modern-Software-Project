@@ -1,7 +1,8 @@
 Ripped code off from here
 https://img.youtube.com/vi/RpWeNzfSUHw/hqdefault.jpg)](https://www.youtube.com/watch?v=RpWeNzfSUHw&list=PLqnslRFeH2UrFW4AUgn-eY37qOAWQpJyg
 
-Basically a slightly more advanced Eliza as in the inputs don't have to be exactly matched up.  This is a simple implementation of the philospher bot with Marcus Aurelius quotes loaded in
+## What is This?
+This project is an implementation of a chatbot using Marcus Aurelius, William Shakespeare, Socrates, and Maya Angelou quotes. The chatbot leverages natural language processing and machine learning to simulate a conversation with a philosopher. It is a slightly more advanced implementation of the Eliza chatbot, as it doesn't require exact matches on inputs.
 
 ## Installation
 
@@ -30,6 +31,7 @@ You also need `nltk`:
  ```console
 pip install nltk
  ```
+pip install torch  # Follow the official PyTorch website for the correct command
 
 If you get an error during the first run, you also need to install `nltk.tokenize.punkt`:
 Run this once in your terminal:
@@ -74,3 +76,7 @@ Have a look at [intents.json](intents.json). You can customize it according to y
   ]
 }
 ```
+
+## Git History
+You can generate the Git history using the following command:
+git log > git_history
