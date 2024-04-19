@@ -80,3 +80,25 @@ Have a look at [intents.json](intents.json). You can customize it according to y
 ## Git History
 You can generate the Git history using the following command:
 git log > git_history
+
+## Contributions by Team
+
+We currently have a functional UI that displays all poets and a functional chatbot for each poet. As of this time, only Socrates has been fully integrated with the model. We plan to implement the model with the remaining poets.
+
+### Frontend Team (Esther and Kellen)
+
+The frontend team worked on:
+
+- **User Interface (UI):** Created an intuitive and user-friendly interface for the chatbot.
+- **Chat Window:** Designed a responsive chat window for seamless interaction with the bot.
+- **Design Elements:** Implemented visual design elements such as colors, fonts, and icons to enhance the user experience.
+- **Integration:** Coordinated with the backend team to integrate the frontend UI with the backend API for a smooth and efficient communication flow.
+
+### Backend Team (Austin and Mason)
+
+The backend team worked on:
+
+- **Natural Language Processing (NLP):** Implemented natural language processing using NLTK and PyTorch to handle user input and generate responses.
+- **Model Training:** Trained and optimized machine learning models for understanding user input and providing appropriate responses.
+- **Data Management:** Managed training data, including `intents.json`, and ensured data quality and accuracy for better model performance.
+- **API Development:** Created RESTful APIs for frontend-backend communication and data exchange.
