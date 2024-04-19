@@ -10,29 +10,26 @@ message = "default message"
 userInput = "test"
 philo = 0
 @cross_origin() 
-@app.route("/back/<phi>/<messageSent>/")
-def hello_world(phi, messageSent):
-    philo = phi
+@app.route("/back/<messageSent>/")
+def hello_world(messageSent):
     print("hello world")
     message = messageSent
     # return(json.dumps(message))
-    return json.dumps(asd(message, philo))
+    return json.dumps(asd(message))
 
 @cross_origin() 
-@app.route("/front/<phi>/<messageSent>/", methods=['POST'])
-def metmessage(phi, messageSent):
-    philo = phi
+@app.route("/front/<messageSent>/", methods=['POST'])
+def metmessage(messageSent):
     print("met message")
     # return message
     userInput = messageSent
-    return hello_world(phi, messageSent)
+    return hello_world(messageSent)
 
 @cross_origin() 
-@app.route("/message/<phi>/<messageSent>/", methods=['GET'])
-def getMessage(phi, messageSent):
-    philo = phi
+@app.route("/message/<messageSent>/", methods=['GET'])
+def getMessage(messageSent):
     print("get message")
-    return(hello_world(phi, messageSent))
+    return(hello_world(messageSent))
 
 
 @app.route("/")

@@ -1,4 +1,4 @@
-def chat(philo, sentence):    
+def chat(sentence):    
 
     import random
     import json
@@ -27,7 +27,7 @@ def chat(philo, sentence):
     model.load_state_dict(model_state)
     model.eval()
 
-    philoChoice = philo
+    philoChoice = 1
     print("philo choice is ", philoChoice)
     switcher = {
         0: "Aurelius",
@@ -62,6 +62,7 @@ def chat(philo, sentence):
             print(tag, "prob is", prob.item())
             for intent in intents['intents']:
                 if tag == intent["tag"]:
+                    print(random.choice(intent['responses'][philoChoice]))
                     return(random.choice(intent['responses'][philoChoice]))
                     print(f"{bot_name}: {random.choice(intent['responses'][philoChoice])}")
                     if intent['tag'] == "goodbye":

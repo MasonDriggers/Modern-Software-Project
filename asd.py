@@ -1,9 +1,9 @@
-def asd(message, philo):
+def asd(message):
     from chat import chat
         # varname = input("You: " )
     print("In asd")
     print(message)
-    return(chat(philo, message))
+    return(chat(message))
     
 
     
