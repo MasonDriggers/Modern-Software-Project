@@ -43,26 +43,36 @@
         // Load responses from movie_lines.txt
         var responses = {};
 
-        // Function to load responses from text file
-        function loadResponses() {
-            fetch('movie_lines.txt')
-                .then(response => response.text())
-                .then(data => {
-                    var lines = data.split('\n');
-                    for (var i = 0; i < lines.length; i++) {
-                        var parts = lines[i].split(' +++$+++ ');
-                        if (parts.length === 5) {
-                            responses[parts[0].trim()] = parts[4].trim();
-                        }
-                    }
-                });
-        }
-
-        loadResponses();
 
         // Function to send message
     function sendMessage() {
     var userMessage = document.getElementById("user-message").value;
+
+    fetch(`http://127.0.0.1:5000/front/1/${userMessage}/`, {
+        method: "POST",
+        body: JSON.stringify({
+            message: userMessage
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+        });
+    let d = "chatbot response"
+
+    console.log("AAAAAAA")
+
+
+    let getResponse = async () => {
+        await fetch(`http://127.0.0.1:5000/message/1/${userMessage}/`) // api for the get request
+        .then(response => response.json())
+        .then(data => {d = data})
+    }
+
+    getResponse()
+    
+    console.log("d is " + d)
+    setTimeout(function(){
+        console.log("pos fetch")
 
     // Display user message
     var userMessageDiv = document.createElement("div");
@@ -82,7 +92,8 @@
     messages.appendChild(userMessageDiv);
 
     // Assume a function to get the chatbot response
-    var chatbotResponse = getElizaResponse(userMessage); // Function to fetch response
+    // var chatbotResponse = getElizaResponse(userMessage); // Function to fetch response
+    var chatbotResponse = d;
 
     // Display chatbot's response as before
     var replyMessageDiv = document.createElement("div");
@@ -100,6 +111,8 @@
     // Clear the input area
     document.getElementById("user-message").value = "";
     messages.scrollTop = messages.scrollHeight; // Auto-scroll to the latest message
+    }, 10000);
+    
 }
 
 
@@ -109,16 +122,6 @@
             if (event.key === "Enter") {
                 event.preventDefault(); // Prevent default Enter key behavior (line break)
                 sendMessage(); // Call sendMessage function
-            }
-        }
-
-        // Function to get Eliza's response
-        function getElizaResponse(message) {
-            message = message.toLowerCase(); // Convert message to lowercase for case-insensitive matching
-            if (responses.hasOwnProperty(message)) {
-                return responses[message];
-            } else {
-                return "Thank you for your message! I'll get back to you soon.";
             }
         }
     </script>

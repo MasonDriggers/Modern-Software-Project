@@ -14,5 +14,5 @@ def chat(input_text, philo):
 
     # Decode response
     response = tokenizer.decode(output_ids[:, input_ids.shape[-1]:][0], skip_special_tokens=True)
-
     print(response)
+    return(response)
