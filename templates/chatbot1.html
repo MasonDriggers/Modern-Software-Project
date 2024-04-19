@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>William Shakespeare</title>
+    <title>Socrates</title>
     <link rel="stylesheet" href="chatbot1.css" />
 </head>
 <body>
@@ -15,17 +15,9 @@
         <a href="chatbot4.html" class="bar-link">MARCUS AURELIUS</a>
     </div>
     <div class="container">
-        <h2>YOUR THERAPIST IS IN: WILLIAM SHAKESPEARE</h2>
+        <h2>YOUR THERAPIST IS IN: SOCRATES</h2>
         <div class="paragraph">
-            <p>William Shakespeare (1564-1616) was an English playwright, poet, and actor, 
-                widely regarded as one of the greatest writers in the English language and the 
-                world's pre-eminent dramatist. Born in Stratford-upon-Avon, he produced a vast body 
-                of work, including 39 plays, 154 sonnets, and two long narrative poems. His plays 
-                explore themes of love, power, ambition, and the human condition with unparalleled 
-                depth and insight. Some of his most famous works include "Romeo and Juliet," "Hamlet," 
-                "Macbeth," and "Othello." Shakespeare's enduring influence on literature, theatre, and 
-                language ensures his place as a cultural icon whose works continue to be studied and 
-                performed globally.</p>
+            <p>Socrates (469-399 BCE) was a Greek philosopher renowned for his contributions to ethics and Western philosophy. Born in Athens, little is known about his early life except through the writings of his students, particularly Plato. Socrates is best known for his method of questioning, known as the Socratic method, which aimed at eliciting truth by engaging in dialogue and challenging assumptions. He famously asserted that "the unexamined life is not worth living." Socrates' teachings often challenged societal norms, leading to his trial and execution for impiety and corrupting the youth of Athens. His legacy endures as a foundational figure in philosophical inquiry.</p>
         </div>
         <div class="panel chatbot">
             <div id="chat" class="chatbox">
@@ -45,32 +37,42 @@
 
         // Display initial message from chatbot
         var initialMessageDiv = document.createElement("div");
-        initialMessageDiv.textContent = "Shakespeare: " + initialMessage;
+        initialMessageDiv.textContent = "Socrates: " + initialMessage;
         messages.appendChild(initialMessageDiv);
 
         // Load responses from movie_lines.txt
         var responses = {};
 
-        // Function to load responses from text file
-        function loadResponses() {
-            fetch('movie_lines.txt')
-                .then(response => response.text())
-                .then(data => {
-                    var lines = data.split('\n');
-                    for (var i = 0; i < lines.length; i++) {
-                        var parts = lines[i].split(' +++$+++ ');
-                        if (parts.length === 5) {
-                            responses[parts[0].trim()] = parts[4].trim();
-                        }
-                    }
-                });
-        }
-
-        loadResponses();
 
         // Function to send message
     function sendMessage() {
     var userMessage = document.getElementById("user-message").value;
+
+    fetch(`http://127.0.0.1:5000/front/1/${userMessage}/`, {
+        method: "POST",
+        body: JSON.stringify({
+            message: userMessage
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+        });
+    let d = "chatbot response"
+
+    console.log("AAAAAAA")
+
+
+    let getResponse = async () => {
+        await fetch(`http://127.0.0.1:5000/message/1/${userMessage}/`) // api for the get request
+        .then(response => response.json())
+        .then(data => {d = data})
+    }
+
+    getResponse()
+    
+    console.log("d is " + d)
+    setTimeout(function(){
+        console.log("pos fetch")
 
     // Display user message
     var userMessageDiv = document.createElement("div");
@@ -90,17 +92,18 @@
     messages.appendChild(userMessageDiv);
 
     // Assume a function to get the chatbot response
-    var chatbotResponse = getElizaResponse(userMessage); // Function to fetch response
+    // var chatbotResponse = getElizaResponse(userMessage); // Function to fetch response
+    var chatbotResponse = d;
 
     // Display chatbot's response as before
     var replyMessageDiv = document.createElement("div");
     var socratesIcon = document.createElement("img");
-    socratesIcon.src = "shakespeare.jpg"; // Path to Socrates icon
-    socratesIcon.alt = "Shakespeare Icon";
+    socratesIcon.src = "socrates.jpg"; // Path to Socrates icon
+    socratesIcon.alt = "Socrates Icon";
     socratesIcon.className = "philosopher-icon"; // Add class for styling
     replyMessageDiv.appendChild(socratesIcon);
 
-    var responseText = document.createTextNode("Shakespeare: " + chatbotResponse);
+    var responseText = document.createTextNode("Socrates: " + chatbotResponse);
     replyMessageDiv.appendChild(responseText);
     replyMessageDiv.className = "message-container chatbot-message left";
     messages.appendChild(replyMessageDiv);
@@ -108,6 +111,8 @@
     // Clear the input area
     document.getElementById("user-message").value = "";
     messages.scrollTop = messages.scrollHeight; // Auto-scroll to the latest message
+    }, 10000);
+    
 }
 
 
@@ -117,16 +122,6 @@
             if (event.key === "Enter") {
                 event.preventDefault(); // Prevent default Enter key behavior (line break)
                 sendMessage(); // Call sendMessage function
-            }
-        }
-
-        // Function to get Eliza's response
-        function getElizaResponse(message) {
-            message = message.toLowerCase(); // Convert message to lowercase for case-insensitive matching
-            if (responses.hasOwnProperty(message)) {
-                return responses[message];
-            } else {
-                return "Thank you for your message! I'll get back to you soon.";
             }
         }
     </script>
