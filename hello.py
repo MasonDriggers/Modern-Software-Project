@@ -12,7 +12,7 @@ philo = 0
 @cross_origin() 
 @app.route("/back/<messageSent>/")
 def hello_world(messageSent):
-    print("hello world")
+    # print("hello world", data)
     message = messageSent
     # return(json.dumps(message))
     return json.dumps(asd(message))
@@ -20,15 +20,15 @@ def hello_world(messageSent):
 @cross_origin() 
 @app.route("/front/<messageSent>/", methods=['POST'])
 def metmessage(messageSent):
-    print("met message")
+    # print("met message")
     # return message
-    userInput = messageSent
+    # userInput = messageSent
     return hello_world(messageSent)
 
 @cross_origin() 
 @app.route("/message/<messageSent>/", methods=['GET'])
 def getMessage(messageSent):
-    print("get message")
+    # print("get message", data)
     return(hello_world(messageSent))
 
 

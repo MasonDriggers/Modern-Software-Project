@@ -59,7 +59,7 @@ def chat(sentence):
         prob = probs[0][predicted.item()]
         # It started as > 75
         if prob.item() > 0.75:
-            print(tag, "prob is", prob.item())
+            # print(tag, "prob is", prob.item())
             for intent in intents['intents']:
                 if tag == intent["tag"]:
                     print(random.choice(intent['responses'][philoChoice]))
@@ -68,8 +68,6 @@ def chat(sentence):
                     if intent['tag'] == "goodbye":
                         isEnded = True
         else:
-            print("goto other conversational bot")
-            return("WENT TO FUCKING CHATBOT")
             return(chat(sentence, bot_name))
             print(chat(sentence, bot_name))
         if isEnded:
