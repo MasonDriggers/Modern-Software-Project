@@ -1,5 +1,5 @@
-def chat(sentence):    
-
+def chat(sentence, philo):    
+    print("The sentence it is receiving is ", sentence)
     import random
     import json
     from conversationalBot import chat
@@ -27,7 +27,7 @@ def chat(sentence):
     model.load_state_dict(model_state)
     model.eval()
 
-    philoChoice = 1
+    philoChoice = int(philo)
     print("philo choice is ", philoChoice)
     switcher = {
         0: "Aurelius",
@@ -62,7 +62,7 @@ def chat(sentence):
             # print(tag, "prob is", prob.item())
             for intent in intents['intents']:
                 if tag == intent["tag"]:
-                    print(random.choice(intent['responses'][philoChoice]))
+                    # print(random.choice(intent['responses'][philoChoice]))
                     return(random.choice(intent['responses'][philoChoice]))
                     print(f"{bot_name}: {random.choice(intent['responses'][philoChoice])}")
                     if intent['tag'] == "goodbye":
