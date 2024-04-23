@@ -43,70 +43,116 @@
         messages.appendChild(initialMessageDiv);
 
         var responses = {};
+ // Function to send message
+ function sendMessage() {
+    var userMessage = document.getElementById("user-message").value;
 
-        function loadResponses() {
-            fetch('movie_lines.txt')
-                .then(response => response.text())
-                .then(data => {
-                    var lines = data.split('\n');
-                    for (var i = 0; i < lines.length; i++) {
-                        var parts = lines[i].split(' +++$+++ ');
-                        if (parts.length === 5) {
-                            responses[parts[0].trim()] = parts[4].trim();
-                        }
-                    }
-                });
+    //     fetch(`http://127.0.0.1:5000/front/${userMessage}/`, {
+
+    // fetch(`http://127.0.0.1:5000/front?message=${userMessage}&philo=1`, {
+    //     method: "POST",
+    //     body: JSON.stringify({
+    //         message: userMessage
+    //     }),
+    //     headers: {
+    //         "Content-type": "application/json; charset=UTF-8"
+    //     }
+    //     });
+    let d = "chatbot response"
+
+
+    let sendMessages = async () => {
+        await     fetch(`http://127.0.0.1:5000/front?message=${userMessage}&philo=0`, {
+        method: "POST",
+        body: JSON.stringify({
+            message: userMessage
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
         }
+        });
+    }
 
-        loadResponses();
+//     let sendMessage = async (userMessage) => {
+//     await fetch(`http://127.0.0.1:5000/front?message=${userMessage}&philo=1`, {
+//         method: "POST",
+//         body: JSON.stringify({
+//             message: userMessage
+//         }),
+//         headers: {
+//             "Content-type": "application/json; charset=UTF-8"
+//         }
+//     });
+// }
 
-        function sendMessage() {
-            var userMessage = document.getElementById("user-message").value;
-            var userMessageDiv = document.createElement("div");
-            userMessageDiv.className = "message-container user-message right";
-            var userIcon = document.createElement("img");
-            userIcon.src = "user.jpg";
-            userIcon.alt = "User Icon";
-            userIcon.className = "user-icon";
-            userMessageDiv.appendChild(userIcon);
 
-            var messageText = document.createElement("span");
-            messageText.textContent = "User: " + userMessage;
-            userMessageDiv.appendChild(messageText);
+    let getResponse = async () => {
+        await fetch(`http://127.0.0.1:5000/message/${userMessage}/`) // api for the get request
+        .then(response => response.json())
+        .then(data => {d = data})
+    }
+    sendMessages()
+    setTimeout(function(){
+        getResponse()
+    
+    console.log("second fetch")
 
-            messages.appendChild(userMessageDiv);
+    console.log("d is " + d)
 
-            var chatbotResponse = getElizaResponse(userMessage);
+    console.log("outside timout")
+    setTimeout(function(){
+        console.log("pos fetch")
 
-            var replyMessageDiv = document.createElement("div");
-            var aureliusIcon = document.createElement("img");
-            aureliusIcon.src = "aurelius.jpg";
-            aureliusIcon.alt = "Marcus Aurelius Icon";
-            aureliusIcon.className = "philosopher-icon";
-            replyMessageDiv.appendChild(aureliusIcon);
+    // Display user message
+    var userMessageDiv = document.createElement("div");
+    userMessageDiv.className = "message-container user-message right";
 
-            var responseText = document.createTextNode("Marcus Aurelius: " + chatbotResponse);
-            replyMessageDiv.appendChild(responseText);
-            replyMessageDiv.className = "message-container chatbot-message left";
-            messages.appendChild(replyMessageDiv);
+    // Create and prepend user icon
+    var userIcon = document.createElement("img");
+    userIcon.src = "user.jpg"; // Path to user icon
+    userIcon.alt = "User Icon";
+    userIcon.className = "user-icon"; // Add class for styling
+    userMessageDiv.appendChild(userIcon);
 
-            document.getElementById("user-message").value = "";
-            messages.scrollTop = messages.scrollHeight;
-        }
+    var messageText = document.createElement("span");
+    messageText.textContent = "User: " + userMessage;
+    userMessageDiv.appendChild(messageText);
 
+    messages.appendChild(userMessageDiv);
+
+    // Assume a function to get the chatbot response
+    // var chatbotResponse = getElizaResponse(userMessage); // Function to fetch response
+    var chatbotResponse = d;
+
+    // Display chatbot's response as before
+    var replyMessageDiv = document.createElement("div");
+    var aureliusIcon = document.createElement("img");
+    aureliusIcon.src = "socrates.jpg"; // Path to Aurelius icon
+    aureliusIcon.alt = "Socrates Icon";
+    aureliusIcon.className = "philosopher-icon"; // Add class for styling
+    replyMessageDiv.appendChild(aureliusIcon);
+
+    var responseText = document.createTextNode("Aurelius: " + chatbotResponse);
+    replyMessageDiv.appendChild(responseText);
+    replyMessageDiv.className = "message-container chatbot-message left";
+    messages.appendChild(replyMessageDiv);
+
+    // Clear the input area
+    document.getElementById("user-message").value = "";
+    messages.scrollTop = messages.scrollHeight; // Auto-scroll to the latest message
+    }, 10000);
+    }, 10000);
+    
+    
+}
+
+
+
+        // Function to handle key down event in textarea
         function handleKeyDown(event) {
             if (event.key === "Enter") {
-                event.preventDefault();
-                sendMessage();
-            }
-        }
-
-        function getElizaResponse(message) {
-            message = message.toLowerCase();
-            if (responses.hasOwnProperty(message)) {
-                return responses[message];
-            } else {
-                return "Thank you for your message! I'll get back to you soon.";
+                event.preventDefault(); // Prevent default Enter key behavior (line break)
+                sendMessage(); // Call sendMessage function
             }
         }
     </script>

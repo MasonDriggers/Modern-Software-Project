@@ -68,59 +68,73 @@
         function sendMessage() {
             var userMessage = document.getElementById("user-message").value;
 
-            // Display user message
-            var userMessageDiv = document.createElement("div");
-            userMessageDiv.className = "message-container user-message right";
+            // Function to send message
+            let d = "chatbot response";
 
-            // Create and prepend user icon
-            var userIcon = document.createElement("img");
-            userIcon.src = "user.jpg"; // Path to user icon
-            userIcon.alt = "User Icon";
-            userIcon.className = "user-icon"; // Add class for styling
-            userMessageDiv.appendChild(userIcon);
+            let sendMessages = async () => {
+                await fetch(`http://127.0.0.1:5000/front?message=${userMessage}&philo=3`, {
+                    method: "POST",
+                    body: JSON.stringify({
+                        message: userMessage
+                    }),
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8"
+                    }
+                });
+            }
 
-            var messageText = document.createElement("span");
-            messageText.textContent = "User: " + userMessage;
-            userMessageDiv.appendChild(messageText);
+            let getResponse = async () => {
+                await fetch(`http://127.0.0.1:5000/message/${userMessage}/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        d = data
+                    })
+            }
+            sendMessages()
+            setTimeout(function () {
+                getResponse()
 
-            messages.appendChild(userMessageDiv);
+                setTimeout(function () {
+                    var userMessageDiv = document.createElement("div");
+                    userMessageDiv.className = "message-container user-message right";
 
-            // Assume a function to get the chatbot response
-            var chatbotResponse = getElizaResponse(userMessage); // Function to fetch response
+                    var userIcon = document.createElement("img");
+                    userIcon.src = "user.jpg"; 
+                    userIcon.alt = "User Icon";
+                    userIcon.className = "user-icon"; 
+                    userMessageDiv.appendChild(userIcon);
 
-            // Display chatbot's response as before
-            var replyMessageDiv = document.createElement("div");
-            var angelouIcon = document.createElement("img");
-            angelouIcon.src = "angelou.jpg"; // Path to Angelou icon
-            angelouIcon.alt = "Angelou Icon";
-            angelouIcon.className = "philosopher-icon"; // Add class for styling
-            replyMessageDiv.appendChild(angelouIcon);
+                    var messageText = document.createElement("span");
+                    messageText.textContent = "User: " + userMessage;
+                    userMessageDiv.appendChild(messageText);
 
-            var responseText = document.createTextNode("Angelou: " + chatbotResponse);
-            replyMessageDiv.appendChild(responseText);
-            replyMessageDiv.className = "message-container chatbot-message left";
-            messages.appendChild(replyMessageDiv);
+                    messages.appendChild(userMessageDiv);
 
-            // Clear the input area
-            document.getElementById("user-message").value = "";
-            messages.scrollTop = messages.scrollHeight; // Auto-scroll to the latest message
+                    var chatbotResponse = d;
+
+                    var replyMessageDiv = document.createElement("div");
+                    var angelouIcon = document.createElement("img");
+                    angelouIcon.src = "Angelou.jpg"; 
+                    angelouIcon.alt = "Angelou Icon";
+                    angelouIcon.className = "philosopher-icon"; 
+                    replyMessageDiv.appendChild(angelouIcon);
+
+                    var responseText = document.createTextNode("Maya Angelou: " + chatbotResponse);
+                    replyMessageDiv.appendChild(responseText);
+                    replyMessageDiv.className = "message-container chatbot-message left";
+                    messages.appendChild(replyMessageDiv);
+
+                    document.getElementById("user-message").value = "";
+                    messages.scrollTop = messages.scrollHeight; 
+                }, 10000);
+            }, 10000);
         }
 
         // Function to handle key down event in textarea
         function handleKeyDown(event) {
             if (event.key === "Enter") {
-                event.preventDefault(); // Prevent default Enter key behavior (line break)
-                sendMessage(); // Call sendMessage function
-            }
-        }
-
-        // Function to get Eliza's response
-        function getElizaResponse(message) {
-            message = message.toLowerCase(); // Convert message to lowercase for case-insensitive matching
-            if (responses.hasOwnProperty(message)) {
-                return responses[message];
-            } else {
-                return "Thank you for your message! I'll get back to you soon.";
+                event.preventDefault(); 
+                sendMessage(); 
             }
         }
     </script>

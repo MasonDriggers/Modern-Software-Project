@@ -31,96 +31,70 @@
     </div>
 
     <script>
-        // Define initial message from chatbot
         var initialMessage = "How can I help?";
         var messages = document.getElementById("messages");
+        var pageNumber=2;
 
         // Display initial message from chatbot
         var initialMessageDiv = document.createElement("div");
         initialMessageDiv.textContent = "Socrates: " + initialMessage;
         messages.appendChild(initialMessageDiv);
 
-        // Load responses from movie_lines.txt
-        var responses = {};
+        // Function to send and receive message from server
+        function sendMessage() {
+            var userMessage = document.getElementById("user-message").value;
+            var pageNumber=2;
 
-
-        // Function to send message
-    function sendMessage() {
-    var userMessage = document.getElementById("user-message").value;
-
-    fetch(`http://127.0.0.1:5000/front/1/${userMessage}/`, {
-        method: "POST",
-        body: JSON.stringify({
-            message: userMessage
-        }),
-        headers: {
-            "Content-type": "application/json; charset=UTF-8"
+            // Fetch chatbot response using GET request with query parameters
+            fetch(`http://127.0.0.1:5000/front?message=${encodeURIComponent(userMessage)}&philo=2`, {
+                method: "GET"
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Data received:", data); // Log the response data
+                displayMessages(userMessage, data.response); // Function to handle message display
+            })
+            .catch(error => console.error('Error:', error));
         }
-        });
-    let d = "chatbot response"
 
-    console.log("AAAAAAA")
+        // Function to display user and chatbot messages
+        function displayMessages(userMessage, chatbotResponse) {
+            var userMessageDiv = document.createElement("div");
+            userMessageDiv.className = "message-container user-message right";
 
+            var userIcon = document.createElement("img");
+            userIcon.src = "user.jpg"; // Path to user icon
+            userIcon.alt = "User Icon";
+            userIcon.className = "user-icon";
+            userMessageDiv.appendChild(userIcon);
 
-    let getResponse = async () => {
-        await fetch(`http://127.0.0.1:5000/message/1/${userMessage}/`) // api for the get request
-        .then(response => response.json())
-        .then(data => {d = data})
-    }
+            var messageText = document.createElement("span");
+            messageText.textContent = "User: " + userMessage;
+            userMessageDiv.appendChild(messageText);
+            messages.appendChild(userMessageDiv);
 
-    getResponse()
-    
-    console.log("d is " + d)
-    setTimeout(function(){
-        console.log("pos fetch")
+            // Display chatbot's response
+            var replyMessageDiv = document.createElement("div");
+            var socratesIcon = document.createElement("img");
+            socratesIcon.src = "socrates.jpg"; // Path to Socrates icon
+            socratesIcon.alt = "Socrates Icon";
+            socratesIcon.className = "philosopher-icon";
+            replyMessageDiv.appendChild(socratesIcon);
 
-    // Display user message
-    var userMessageDiv = document.createElement("div");
-    userMessageDiv.className = "message-container user-message right";
+            var responseText = document.createTextNode("Socrates: " + chatbotResponse);
+            replyMessageDiv.appendChild(responseText);
+            replyMessageDiv.className = "message-container chatbot-message left";
+            messages.appendChild(replyMessageDiv);
 
-    // Create and prepend user icon
-    var userIcon = document.createElement("img");
-    userIcon.src = "user.jpg"; // Path to user icon
-    userIcon.alt = "User Icon";
-    userIcon.className = "user-icon"; // Add class for styling
-    userMessageDiv.appendChild(userIcon);
-
-    var messageText = document.createElement("span");
-    messageText.textContent = "User: " + userMessage;
-    userMessageDiv.appendChild(messageText);
-
-    messages.appendChild(userMessageDiv);
-
-    // Assume a function to get the chatbot response
-    // var chatbotResponse = getElizaResponse(userMessage); // Function to fetch response
-    var chatbotResponse = d;
-
-    // Display chatbot's response as before
-    var replyMessageDiv = document.createElement("div");
-    var socratesIcon = document.createElement("img");
-    socratesIcon.src = "socrates.jpg"; // Path to Socrates icon
-    socratesIcon.alt = "Socrates Icon";
-    socratesIcon.className = "philosopher-icon"; // Add class for styling
-    replyMessageDiv.appendChild(socratesIcon);
-
-    var responseText = document.createTextNode("Socrates: " + chatbotResponse);
-    replyMessageDiv.appendChild(responseText);
-    replyMessageDiv.className = "message-container chatbot-message left";
-    messages.appendChild(replyMessageDiv);
-
-    // Clear the input area
-    document.getElementById("user-message").value = "";
-    messages.scrollTop = messages.scrollHeight; // Auto-scroll to the latest message
-    }, 10000);
-    
-}
-
-
+            // Clear the input area and auto-scroll to the latest message
+            document.getElementById("user-message").value = "";
+            messages.scrollTop = messages.scrollHeight;
+        }
 
         // Function to handle key down event in textarea
         function handleKeyDown(event) {
             if (event.key === "Enter") {
-                event.preventDefault(); // Prevent default Enter key behavior (line break)
+                event.preventDefault(); // Prevent default Enter key behavior
                 sendMessage(); // Call sendMessage function
             }
         }
