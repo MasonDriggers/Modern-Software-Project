@@ -48,7 +48,22 @@
     function sendMessage() {
     var userMessage = document.getElementById("user-message").value;
 
-    fetch(`http://127.0.0.1:5000/front/${userMessage}/`, {
+    //     fetch(`http://127.0.0.1:5000/front/${userMessage}/`, {
+
+    // fetch(`http://127.0.0.1:5000/front?message=${userMessage}&philo=1`, {
+    //     method: "POST",
+    //     body: JSON.stringify({
+    //         message: userMessage
+    //     }),
+    //     headers: {
+    //         "Content-type": "application/json; charset=UTF-8"
+    //     }
+    //     });
+    let d = "chatbot response"
+
+
+    let sendMessages = async () => {
+        await     fetch(`http://127.0.0.1:5000/front?message=${userMessage}&philo=1`, {
         method: "POST",
         body: JSON.stringify({
             message: userMessage
@@ -57,9 +72,19 @@
             "Content-type": "application/json; charset=UTF-8"
         }
         });
-    let d = "chatbot response"
+    }
 
-    console.log("AAAAAAA")
+//     let sendMessage = async (userMessage) => {
+//     await fetch(`http://127.0.0.1:5000/front?message=${userMessage}&philo=1`, {
+//         method: "POST",
+//         body: JSON.stringify({
+//             message: userMessage
+//         }),
+//         headers: {
+//             "Content-type": "application/json; charset=UTF-8"
+//         }
+//     });
+// }
 
 
     let getResponse = async () => {
@@ -67,10 +92,15 @@
         .then(response => response.json())
         .then(data => {d = data})
     }
-
-    getResponse()
+    sendMessages()
+    setTimeout(function(){
+        getResponse()
     
+    console.log("second fetch")
+
     console.log("d is " + d)
+
+    console.log("outside timout")
     setTimeout(function(){
         console.log("pos fetch")
 
@@ -112,6 +142,8 @@
     document.getElementById("user-message").value = "";
     messages.scrollTop = messages.scrollHeight; // Auto-scroll to the latest message
     }, 10000);
+    }, 10000);
+    
     
 }
 
